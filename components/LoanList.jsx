@@ -71,6 +71,10 @@ export default function LoanList() {
     deleteLoan(id);
   }
 
+  if (!loans || !Array.isArray(loans)) {
+  return <p>Carregando empréstimos...</p>;
+}
+
   return (
     <div className="space-y-6">
       {loans.length === 0 && (
