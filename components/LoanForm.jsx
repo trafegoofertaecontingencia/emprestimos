@@ -4,7 +4,7 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 export default function LoanForm() {
-  const { dispatch } = useLoanContext();
+  const { dispatch, loans } = useLoanContext();
 
   const [name, setName] = useState("");
   const [capital, setCapital] = useState("");

@@ -72,8 +72,8 @@ export default function LoanList() {
   }
 
   if (!loans || !Array.isArray(loans)) {
-  return <p>Carregando empréstimos...</p>;
-}
+    return <p>Carregando empréstimos...</p>;
+  }
 
   return (
     <div className="space-y-6">
@@ -84,12 +84,21 @@ export default function LoanList() {
       {loans.map((loan) => {
         const juros = calcularJuros(loan);
         const ultimoPagamento = calcularUltimoPagamento(loan);
+
+        // Cálculo do vencimento
         const dataVencimento = new Date(
           new Date(ultimoPagamento).getTime() + loan.termDays * 86400000
         );
+
+        // Normalize para evitar erro de fuso horário
         const hoje = new Date();
-        const vencido = hoje.toDateString() >= dataVencimento.toDateString();
-        const diasParaVencer = Math.ceil((dataVencimento - hoje) / 86400000);
+        hoje.setHours(0, 0, 0, 0);
+
+        const vencimentoNormalizado = new Date(dataVencimento);
+        vencimentoNormalizado.setHours(0, 0, 0, 0);
+
+        const vencido = hoje >= vencimentoNormalizado;
+       const diasParaVencer = Math.floor((dataVencimento - hoje) / 86400000);
 
         return (
           <div
@@ -152,7 +161,9 @@ export default function LoanList() {
 
               <button
                 onClick={() => {
-                  if (confirm("Tem certeza que deseja quitar e excluir este empréstimo?")) {
+                  if (
+                    confirm("Tem certeza que deseja quitar e excluir este empréstimo?")
+                  ) {
                     quitarTudo(loan.id);
                   }
                 }}
