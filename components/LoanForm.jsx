@@ -13,6 +13,12 @@ export default function LoanForm() {
   const [startDate, setStartDate] = useState("");
   const [lastPaymentDate, setLastPaymentDate] = useState("");
 
+  // 🛠 Corrige a data para fuso horário local (evita aparecer como "um dia antes")
+  function fixDateToLocal(inputDate) {
+    const [year, month, day] = inputDate.split("-");
+    return new Date(year, month - 1, day, 12).toISOString(); // meio-dia no horário local
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -27,17 +33,16 @@ export default function LoanForm() {
       capital: parseFloat(capital),
       interestRate: parseFloat(interestRate) / 100,
       termDays: parseInt(termDays),
-      startDate,
+      startDate: fixDateToLocal(startDate),
       transactions: [],
     };
 
-    // Se o usuário informou uma data de último pagamento, cria uma transação inicial
     if (lastPaymentDate) {
       newLoan.transactions.push({
         id: uuidv4(),
         amount: 0,
         type: "INTEREST",
-        paidAt: lastPaymentDate
+        paidAt: fixDateToLocal(lastPaymentDate),
       });
     }
 
@@ -66,7 +71,7 @@ export default function LoanForm() {
             type="text"
             className="w-full mt-1 px-3 py-2 border rounded shadow-sm"
             value={name}
-            onChange={e => setName(e.target.value)}
+            onChange={(e) => setName(e.target.value)}
           />
         </div>
 
@@ -76,7 +81,7 @@ export default function LoanForm() {
             type="number"
             className="w-full mt-1 px-3 py-2 border rounded shadow-sm"
             value={capital}
-            onChange={e => setCapital(e.target.value)}
+            onChange={(e) => setCapital(e.target.value)}
           />
         </div>
 
@@ -86,7 +91,7 @@ export default function LoanForm() {
             type="number"
             className="w-full mt-1 px-3 py-2 border rounded shadow-sm"
             value={interestRate}
-            onChange={e => setInterestRate(e.target.value)}
+            onChange={(e) => setInterestRate(e.target.value)}
           />
         </div>
 
@@ -96,7 +101,7 @@ export default function LoanForm() {
             type="number"
             className="w-full mt-1 px-3 py-2 border rounded shadow-sm"
             value={termDays}
-            onChange={e => setTermDays(e.target.value)}
+            onChange={(e) => setTermDays(e.target.value)}
           />
         </div>
 
@@ -106,7 +111,7 @@ export default function LoanForm() {
             type="date"
             className="w-full mt-1 px-3 py-2 border rounded shadow-sm"
             value={startDate}
-            onChange={e => setStartDate(e.target.value)}
+            onChange={(e) => setStartDate(e.target.value)}
           />
         </div>
 
@@ -118,7 +123,7 @@ export default function LoanForm() {
             type="date"
             className="w-full mt-1 px-3 py-2 border rounded shadow-sm"
             value={lastPaymentDate}
-            onChange={e => setLastPaymentDate(e.target.value)}
+            onChange={(e) => setLastPaymentDate(e.target.value)}
           />
         </div>
       </div>
