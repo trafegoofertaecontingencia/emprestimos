@@ -60,9 +60,6 @@ export default function Dashboard() {
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm text-gray-700">
-        <div className="p-4 border rounded bg-gray-50">
-          <strong>Total de empréstimos:</strong><br /> {loans.length}
-        </div>
 
         <div className="p-4 border rounded bg-gray-50">
           <strong>Capital emprestado:</strong><br /> R$ {totalCapital.toFixed(2)}
@@ -72,10 +69,6 @@ export default function Dashboard() {
           <strong>Juros projetados:</strong><br /> R$ {totalJurosProjetado.toFixed(2)}
         </div>
 
-        <div className="p-4 border rounded bg-green-50 border-green-200">
-          <strong>Clientes em dia:</strong><br /> {emDia}
-        </div>
-
         <div className="p-4 border rounded bg-red-50 border-red-200">
           <strong>Clientes vencidos:</strong><br />
           {vencidos === 0 ? (
@@ -83,20 +76,8 @@ export default function Dashboard() {
           ) : (
             <>
               <span>{vencidos}</span>
-              <ul className="mt-2 list-disc list-inside text-sm text-red-800">
-                {clientesVencidos.map((nome, i) => (
-                  <li key={i}>{nome}</li>
-                ))}
-              </ul>
             </>
           )}
-        </div>
-
-        <div className="p-4 border rounded bg-gray-100">
-          <strong>Último pagamento:</strong><br />
-          {ultimoPagamento
-            ? new Date(ultimoPagamento).toLocaleDateString()
-            : "Nenhum ainda"}
         </div>
       </div>
     </section>

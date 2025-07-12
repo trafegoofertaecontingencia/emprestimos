@@ -148,7 +148,7 @@ export default function LoanList() {
 
               <ul className="text-sm space-y-1 mb-4">
                 <li>
-                  📆 Criado em:{" "}
+                  📆 Emprestou no dia:{" "}
                   <strong>
                     {new Date(loan.startDate).toLocaleDateString("pt-BR")}
                   </strong>
