@@ -69,6 +69,7 @@ export default function LoanForm() {
           <label className="block text-sm font-medium text-gray-700">Nome</label>
           <input
             type="text"
+            placeholder="Ex: Ailton"
             className="w-full mt-1 px-3 py-2 border rounded shadow-sm"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -79,6 +80,7 @@ export default function LoanForm() {
           <label className="block text-sm font-medium text-gray-700">Capital (R$)</label>
           <input
             type="number"
+            placeholder="Ex: 1000"
             className="w-full mt-1 px-3 py-2 border rounded shadow-sm"
             value={capital}
             onChange={(e) => setCapital(e.target.value)}
@@ -89,6 +91,7 @@ export default function LoanForm() {
           <label className="block text-sm font-medium text-gray-700">Juros (%)</label>
           <input
             type="number"
+            placeholder="Ex: 20"
             className="w-full mt-1 px-3 py-2 border rounded shadow-sm"
             value={interestRate}
             onChange={(e) => setInterestRate(e.target.value)}
@@ -99,6 +102,7 @@ export default function LoanForm() {
           <label className="block text-sm font-medium text-gray-700">Prazo (dias)</label>
           <input
             type="number"
+            placeholder="Ex: 30"
             className="w-full mt-1 px-3 py-2 border rounded shadow-sm"
             value={termDays}
             onChange={(e) => setTermDays(e.target.value)}
