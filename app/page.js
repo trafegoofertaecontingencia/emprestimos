@@ -10,7 +10,6 @@ export default function HomePage() {
         <div className="max-w-5xl mx-auto space-y-10">
           <Dashboard />
           <section className="bg-gray-100 p-6 rounded-xl shadow">
-            <h1 className="text-3xl mb-4">Cadastrar emprestimo</h1>
             <LoanForm />
           </section>
           <section className="bg-gray-100 p-6 rounded-xl shadow">
